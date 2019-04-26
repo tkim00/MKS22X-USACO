@@ -7,7 +7,8 @@ public class USACO {
 
   public static void main(String[] args) {
     try {
-      System.out.println(bronze("makelake.2.in"));
+      // System.out.println(bronze("makelake.2.in"));
+      // System.out.println(silver("ctravel.2.in"));
     } catch(FileNotFoundException e) {
       System.out.println("the file is not found");
     }
@@ -61,7 +62,47 @@ public class USACO {
     return totalDepth*72*72;
   }
 
-  // public static int silver(String filename) {
-  //
-  // }
+  public static int silver(String filename) throws FileNotFoundException {
+    File problem = new File(filename);
+    Scanner inf = new Scanner(problem);
+    String line = inf.nextLine();
+    String[] inputs = line.split(" ");
+    int row = Integer.parseInt(inputs[0]);
+    int col = Integer.parseInt(inputs[1]);
+    int seconds = Integer.parseInt(inputs[2]);
+    char[][] pasture = new char[row][col];
+    for (int r = 0; r < row; r++) {
+      line = inf.nextLine();
+      for (int c = 0; c < col; c++) {
+        pasture[r][c] = line.charAt(c);
+      }
+    }
+    line = inf.nextLine();
+    inputs = line.split(" ");
+    int r1 = Integer.parseInt(inputs[0])-1;
+    int c1 = Integer.parseInt(inputs[1])-1;
+    int r2 = Integer.parseInt(inputs[2])-1;
+    int c2 = Integer.parseInt(inputs[3])-1;
+    return silverH(pasture, r1, c1, r2, c2, seconds);
+  }
+
+  private static int silverH(char[][] pasture, int r1, int c1, int r2, int c2, int seconds) {
+    int s = 0;
+    if (seconds == 0) {
+      if (r2 == r1 && c2 == c1) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+    if (r1 >= 0 && r1 < pasture.length &&
+        c1 >= 0 && c1 < pasture[0].length &&
+        pasture[r1][c1] != '*') {
+      s+=silverH(pasture, r1+1, c1, r2, c2, seconds-1);
+      s+=silverH(pasture, r1, c1+1, r2, c2, seconds-1);
+      s+=silverH(pasture, r1-1, c1, r2, c2, seconds-1);
+      s+=silverH(pasture, r1, c1-1, r2, c2, seconds-1);
+    }
+    return s;
+  }
 }
