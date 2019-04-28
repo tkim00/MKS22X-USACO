@@ -5,14 +5,14 @@ public class USACO {
   private static int[][] pasture;
   private static String[] input;
 
-  public static void main(String[] args) {
-    try {
-      // System.out.println(bronze("makelake.2.in"));
-      // System.out.println(silver("ctravel.2.in"));
-    } catch(FileNotFoundException e) {
-      System.out.println("the file is not found");
-    }
-  }
+  // public static void main(String[] args) {
+  //   try {
+  //     System.out.println(bronze("makelake.2.in"));
+  //     System.out.println(silver("ctravel.2.in"));
+  //   } catch(FileNotFoundException e) {
+  //     System.out.println("the file is not found");
+  //   }
+  // }
 
   public static int bronze(String filename) throws FileNotFoundException{
     File problem = new File(filename);
